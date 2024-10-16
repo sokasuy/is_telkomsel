@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @yield('title')
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/dist/img/TelkomselLOGO.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
 

@@ -6,9 +6,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('dashboard.home') }}" class="brand-link">
-        <img src="{{ asset('assets/dist/img/LaravelLOGO.png') }}" alt="Laravel Logo"
+        <img src="{{ asset('assets/dist/img/TelkomselLOGO.png') }}" alt="Telkomsel Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">LARAVEL</span>
+        <span class="brand-text font-weight-light">TELKOMSEL</span>
     </a>
 
     <!-- Sidebar -->
