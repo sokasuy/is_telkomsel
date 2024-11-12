@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/authentication/users/add-user/action', [UserController::class, 'actionRegister'])->name('auth.actionregister');
         Route::post('/authentication/users/change-password', [UserController::class, 'changeUserPassword'])->name('auth.changeuserpassword')->middleware('EnsureUserHasPermission:authentication,users,update');
         Route::post('/authentication/users/change-password/action', [UserController::class, 'actionChangeUserPassword'])->name('auth.actionchangeuserpwd');
+        Route::post('/authentication/users/change-role', [UserController::class, 'changeUserRole'])->name('auth.changeuserrole')->middleware('EnsureUserHasPermission:authentication,users,update');
+        Route::post('/authentication/users/change-role/action', [UserController::class, 'actionChangeUserRole'])->name('auth.actionchangeuserrole');
 
         //ROLES
         Route::get('/authentication/roles', [RoleController::class, 'index'])->name('auth.roles')->middleware('EnsureUserHasPermission:authentication,roles,read');

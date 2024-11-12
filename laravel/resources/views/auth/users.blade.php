@@ -156,8 +156,10 @@
                         var button_delete = "";
 
                         if (hasUpdateUsers) {
-                            button_update =
-                                '<a class="btn_changepassword btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_container"><i class="fas fa-user-edit">&nbsp Change Password</i></a>';
+                            button_change_role =
+                                '<a class="btn_changerole btn btn-success btn-sm" data-toggle="modal" data-target="#modal_container"><i class="fas fa-user-tag">&nbsp Role</i></a>';
+                            button_change_password =
+                                '<a class="btn_changepassword btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_container"><i class="fas fa-key">&nbsp Password</i></a>';
                         } else {
                             button_update = '';
                         }
@@ -168,7 +170,7 @@
                             button_delete = '';
                         }
 
-                        return button_update + button_delete;
+                        return button_change_role + button_change_password + button_delete;
                     }
                     // render: function(data, type, row) {
                     //     return '<a class="btn_changepassword btn btn-primary btn-sm" data-toggle="modal" href="#editusermodal"><i class="fas fa-user-edit">&nbsp Edit</i></a> <a class="btn btn-danger btn-sm" data-toggle="modal" href="#deleteusermodal"><i class="fas fa-trash-alt">&nbsp Delete</i></a>';
@@ -191,6 +193,16 @@
                 // },
                 "buttons": ['pageLength', "copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#tbl_user_wrapper .col-md-6:eq(0)');
+
+            //Initialize Select2 Elements
+            $('.select2').select2();
+
+            //Initialize Select2 Elements
+            $('.select2bs4placeholderrole').select2({
+                theme: 'bootstrap4',
+                placeholder: "User Role",
+                allowClear: false
+            });
         });
 
         $('#tbl_user').on('click', '.btn_changepassword', function() {
@@ -202,7 +214,6 @@
             } else {
                 row = $(this).closest('tr');
             }
-
             let data = $("#tbl_user").DataTable().row(row).data().id;
             changePassword(data);
         });
@@ -223,20 +234,6 @@
                 }
             });
         };
-
-        $('#tbl_user').on('click', '.btn_delete', function() {
-            let className = $(this).closest('tr').attr("class");
-            let row;
-            // harus dilakukan pengecekkan, apakah tombolnya ini di child atau tetap di parent nya
-            if (className === 'child') {
-                row = $(this).before();
-            } else {
-                row = $(this).closest('tr');
-            }
-
-            let data = $("#tbl_user").DataTable().row(row).data().email;
-            alert(data);
-        });
 
         function actionUpdatePassword(id) {
             // let id = $("#id").val();
@@ -264,5 +261,86 @@
                 }
             });
         };
+
+        $('#tbl_user').on('click', '.btn_changerole', function() {
+            let className = $(this).closest('tr').attr("class");
+            let row;
+            // harus dilakukan pengecekkan, apakah tombolnya ini di child atau tetap di parent nya
+            if (className === 'child') {
+                row = $(this).before();
+            } else {
+                row = $(this).closest('tr');
+            }
+            let data = $("#tbl_user").DataTable().row(row).data().id;
+            changeRole(data);
+        });
+
+        function changeRole(id) {
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('auth.changeuserrole') }}',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    'id': id
+                },
+                success: function(data) {
+                    $("#modal_content").html(data.msg);
+
+                    //Initialize Select2 Elements
+                    $('.select2').select2();
+
+                    //Initialize Select2 Elements
+                    $('.select2bs4placeholderrole').select2({
+                        theme: 'bootstrap4',
+                        allowClear: false,
+                        dropdownParent: $("#modal_content")
+                    });
+                },
+                error: function(data, textStatus, errorThrown) {
+                    console.log(data);
+                }
+            });
+        };
+
+        function actionUpdateRole(id) {
+            // let id = $("#id").val();
+            let name = $("#name").val();
+            let email = $("#email").val();
+            let role = $("#role").val();
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('auth.actionchangeuserrole') }}',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: id,
+                    name: name,
+                    email: email,
+                    role: role
+                },
+                success: function(data) {
+                    if (data.status == 'ok') {
+                        $('#showinfo').html(data.msg);
+                    }
+                },
+                error: function(data, textStatus, errorThrown) {
+                    console.log(data);
+                }
+            });
+        };
+
+        $('#tbl_user').on('click', '.btn_delete', function() {
+            let className = $(this).closest('tr').attr("class");
+            let row;
+            // harus dilakukan pengecekkan, apakah tombolnya ini di child atau tetap di parent nya
+            if (className === 'child') {
+                row = $(this).before();
+            } else {
+                row = $(this).closest('tr');
+            }
+
+            let data = $("#tbl_user").DataTable().row(row).data().email;
+            alert(data);
+        });
     </script>
 @endsection
