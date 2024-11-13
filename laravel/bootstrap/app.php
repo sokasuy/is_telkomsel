@@ -18,6 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->appendToGroup('EnsureAuthenticationAccess', [
             App\Http\Middleware\EnsureAuthenticationAccess::class
         ]);
+        $middleware->appendToGroup('EnsureSalesAccess', [
+            App\Http\Middleware\EnsureSalesAccess::class
+        ]);
         // $middleware->appendToGroup('MenuAutentikasiUser', [
         //     AuthenticationUser::class
         //     // Second::class,

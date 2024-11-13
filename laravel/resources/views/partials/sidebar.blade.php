@@ -51,28 +51,28 @@
                     </a>
                 </li>
 
-                {{-- @if (Permission::where('role', Auth::user()->role)->where('grup_menu', 'Charts')->where('read', 1)->exists())
-    <li class="nav-item {{ Request::is('charts*') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link {{ Request::is('charts*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-chart-line"></i>
-            <p>
-                Charts
-                <i class="right fas fa-angle-left"></i>
-            </p>
-        </a>
-        <ul class="nav nav-treeview">
-            @if (Permission::where('role', Auth::user()->role)->where('view', 'buying-power')->where('read', 1)->exists())
-                <li class="nav-item">
-                    <a href="{{ route('charts.buyingpower') }}"
-                        class="nav-link {{ Request::is('charts/buying-power*') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Buying Power</p>
+            @if (Permission::where('role', Auth::user()->role)->where('menu_group', 'sales')->where('read', true)->exists())
+                <li class="nav-item {{ Request::is('sales*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('sales*') ? 'active' : '' }}">
+                        <i class="nav-icon fab fa-salesforce"></i>
+                        <p>
+                            Sales
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        @if (Permission::where('role', Auth::user()->role)->where('view', 'spb')->where('read', true)->exists())
+                            <li class="nav-item">
+                                <a href="{{ route('sales.spb') }}"
+                                    class="nav-link {{ Request::is('sales/spb*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>SPB</p>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
                 </li>
             @endif
-        </ul>
-    </li>
-@endif --}}
 
                 {{-- @if (Permission::where('role', Auth::user()->role)->where('grup_menu', 'master')->where('read', 1)->exists())
 <li class="nav-item {{ Request::is('master*') ? 'menu-open' : '' }}">
