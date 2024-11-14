@@ -4,8 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Permission;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 
 class EnsureAuthenticationAccess

@@ -10,8 +10,8 @@ class SidebarMenu extends Model
     use HasFactory;
     protected $table = 'sidebars_menu';
     protected $fillable = [
-        'id',
         'menu_group',
-        'menu_name'
+        'menu_name',
+        'view'
     ];
 }

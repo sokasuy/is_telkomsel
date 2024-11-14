@@ -3,29 +3,18 @@
 @endphp --}}
 @extends('layouts.auth')
 @section('title')
-    <title>{{ Config::get('app.name') }} | Data Permission</title>
+    <title>{{ Config::get('app.name') }} | Data Permissions</title>
 @endsection
 
 @section('headertitle')
-    <h1>DATA PERMISSION</h1>
+    <h1>DATA PERMISSIONS</h1>
 @endsection
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">Home</a></li>
-    <li class="breadcrumb-item">permission</li>
-    <li class="breadcrumb-item active">Users</li>
+    <li class="breadcrumb-item">Authentication</li>
+    <li class="breadcrumb-item active">Permissions</li>
 @endsection
-
-{{-- @section('cssatas')
-    <style>
-        img .center {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-        }
-    </style>
-@endsection --}}
 
 @section('content')
     <!-- /.row -->
@@ -34,7 +23,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Permission</h3>
+                    <h3 class="card-title">Permissions</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">

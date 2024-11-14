@@ -27,9 +27,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::middleware('EnsureAuthenticationAccess')->group(function () {
-        //SALES
-        Route::get('/sales/spb', [SPBController::class, 'index'])->name('sales.spb')->middleware('EnsureUserHasPermission:sales,spb,read');
+    Route::middleware('EnsureSalesAccess')->group(function () {
+        //SPB
+        Route::get('/sales/spb', [SPBController::class, 'index'])->name('spb.index')->middleware('EnsureUserHasPermission:sales,spb,read');
+        Route::post('/sales/spb/show', [SPBController::class, 'show'])->name('spb.show');
+        Route::get('/sales/spb/create', [SPBController::class, 'create'])->name('spb.create')->middleware('EnsureUserHasPermission:sales,spb,create');
+        Route::get('/sales/spb/edit', [SPBController::class, 'edit'])->name('spb.edit')->middleware('EnsureUserHasPermission:sales,spb,update');
     });
 
     Route::middleware('EnsureAuthenticationAccess')->group(function () {

@@ -12,8 +12,8 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">Home</a></li>
-    <li class="breadcrumb-item">Roles</li>
-    <li class="breadcrumb-item active">Users</li>
+    <li class="breadcrumb-item">Authentication</li>
+    <li class="breadcrumb-item active">Roles</li>
 @endsection
 
 {{-- @section('cssatas')

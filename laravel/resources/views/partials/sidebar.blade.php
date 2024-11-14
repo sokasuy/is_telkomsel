@@ -38,10 +38,10 @@
         </div>
 
         <!-- Sidebar Menu -->
-        <!-- UPDATE JHONATAN -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
+                {{-- DASHBOARD --}}
                 <li class="nav-item">
                     <a href="{{ route('dashboard.home') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -50,7 +50,7 @@
                         </p>
                     </a>
                 </li>
-
+                {{-- SALES --}}
             @if (Permission::where('role', Auth::user()->role)->where('menu_group', 'sales')->where('read', true)->exists())
                 <li class="nav-item {{ Request::is('sales*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ Request::is('sales*') ? 'active' : '' }}">
@@ -63,7 +63,7 @@
                     <ul class="nav nav-treeview">
                         @if (Permission::where('role', Auth::user()->role)->where('view', 'spb')->where('read', true)->exists())
                             <li class="nav-item">
-                                <a href="{{ route('sales.spb') }}"
+                                <a href="{{ route('spb.index') }}"
                                     class="nav-link {{ Request::is('sales/spb*') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>SPB</p>
@@ -192,61 +192,48 @@
 @endif --}}
 
                 @if (Permission::where('role', Auth::user()->role)->where('menu_group', 'authentication')->where('read', true)->exists())
-                    <li
-                        class="nav-item {{ Request::is('authentication*') || Request::is('roles*') || Request::is('permission*') ? 'menu-open' : '' }}">
-                        <a href="#"
-                            class="nav-link {{ Request::is('authentication*') || Request::is('roles*') || Request::is('permission*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Authentication
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            @if (Permission::where('role', Auth::user()->role)->where('view', 'users')->where('read', true)->exists())
-                                <li class="nav-item">
-                                    <a href="{{ route('auth.users') }}"
-                                        class="nav-link {{ Request::is('authentication/users*') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Users</p>
-                                    </a>
-                                </li>
-                            @endif
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            @if (Permission::where('role', Auth::user()->role)->where('view', 'roles')->where('read', true)->exists())
-                                <li class="nav-item">
-                                    <a href="{{ route('auth.roles') }}"
-                                        class="nav-link {{ Request::is('authentication/roles*') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Roles</p>
-                                    </a>
-                                </li>
-                            @endif
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            @if (Permission::where('role', Auth::user()->role)->where('view', 'permission')->where('read', true)->exists())
-                                <li class="nav-item">
-                                    <a href="{{ route('auth.permission') }}"
-                                        class="nav-link {{ Request::is('authentication/permissions*') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Permission</p>
-                                    </a>
-                                </li>
-                            @endif
-                        </ul>
-                        {{-- <ul class="nav nav-treeview">
-            @if (Permission::where('role', Auth::user()->role)->where('view', 'customers')->where('read', true)->exists())
-                <li class="nav-item">
-                    <a href="{{ route('auth.customers') }}"
-                        class="nav-link {{ Request::is('authentication/customers*') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Customers</p>
+                {{-- Authentication --}}
+                <li class="nav-item {{ Request::is('authentication*') || Request::is('roles*') || Request::is('permission*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Request::is('authentication*') || Request::is('roles*') || Request::is('permission*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Authentication
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        @if (Permission::where('role', Auth::user()->role)->where('view', 'users')->where('read', true)->exists())
+                            <li class="nav-item">
+                                <a href="{{ route('auth.users') }}"
+                                    class="nav-link {{ Request::is('authentication/users*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Users</p>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        @if (Permission::where('role', Auth::user()->role)->where('view', 'roles')->where('read', true)->exists())
+                            <li class="nav-item">
+                                <a href="{{ route('auth.roles') }}"
+                                    class="nav-link {{ Request::is('authentication/roles*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Roles</p>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        @if (Permission::where('role', Auth::user()->role)->where('view', 'permission')->where('read', true)->exists())
+                            <li class="nav-item">
+                                <a href="{{ route('auth.permission') }}"
+                                    class="nav-link {{ Request::is('authentication/permissions*') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Permission</p>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
                 </li>
-            @endif
-        </ul> --}}
-                    </li>
                 @endif
             </ul>
         </nav>

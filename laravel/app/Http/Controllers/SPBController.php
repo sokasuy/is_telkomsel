@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\SPB;
 use Illuminate\Http\Request;
+use App\Models\Permission;
+use Illuminate\Support\Facades\Auth;
 
 class SPBController extends Controller
 {
@@ -13,6 +15,16 @@ class SPBController extends Controller
     public function index()
     {
         //
+        $hasCreateNewRecords = Permission::checkPermission(Auth::user()->role, 'sales', 'spb', 'spb', 'create');
+        $hasUpdateRecords = Permission::checkPermission(Auth::user()->role, 'sales', 'spb', 'spb', 'update');
+        $hasDeleteRecords = Permission::checkPermission(Auth::user()->role, 'sales', 'spb', 'spb', 'delete');
+
+        return view('sales.spb', compact('hasCreateNewRecords', 'hasUpdateRecords', 'hasDeleteRecords'));
+    }
+
+    public function getSPBList(Request $request)
+    {
+
     }
 
     /**
@@ -37,6 +49,14 @@ class SPBController extends Controller
     public function show(SPB $sPB)
     {
         //
+        $data = SPB::getDataSPB();
+        return response()->json(
+            array(
+                'status' => 'ok',
+                'data' => $data
+            ),
+            200
+        );
     }
 
     /**
