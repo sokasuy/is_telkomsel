@@ -43,7 +43,7 @@
                         <div class="row mb-0">
                             <div class="col-md-3" style="margin-bottom: 23px;">
                                 {{-- <button type="submit" class="btn btn-primary" id="btn_adduser">Add User</button> --}}
-                                <a class="btn btn-primary btn-sm" href="{{ route('auth.addpermissions') }}"
+                                <a class="btn btn-primary btn-sm" href="{{ route('permissions.create') }}"
                                     id="btn_adduser">
                                     <i class="fas fa-plus">&nbsp Add Permission</i></a>
                             </div>
@@ -118,7 +118,7 @@
                 "processing": true,
                 // "serverSide": true,
                 "ajax": {
-                    "url": '{{ route('auth.getpermission') }}',
+                    "url": '{{ route('permissions.show') }}',
                     "type": "POST",
                     "data": {
                         _token: "{{ csrf_token() }}"
@@ -238,7 +238,7 @@
         function changePermission(id) {
             $.ajax({
                 type: 'POST',
-                url: "{{ route('auth.changepermission') }}",
+                url: "{{ route('permissions.edit') }}",
                 data: {
                     _token: "{{ csrf_token() }}",
                     'id': id
@@ -276,7 +276,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: "{{ route('auth.actionChangePermission') }}",
+                url: "{{ route('permissions.update') }}",
                 data: {
                     _token: "{{ csrf_token() }}",
                     id: id,

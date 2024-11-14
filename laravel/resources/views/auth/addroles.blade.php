@@ -8,7 +8,7 @@
     <span>
         <h1>Roles
         </h1>
-        Add Roles. <a href="{{ route('auth.roles') }}"><i class="fas fa-angle-double-left"></i>&nbsp;Back to all
+        Add Roles. <a href="{{ route('roles.index') }}"><i class="fas fa-angle-double-left"></i>&nbsp;Back to all
             <span>Roles</span></a>
     </span>
 @endsection
@@ -16,7 +16,7 @@
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">Home</a></li>
     <li class="breadcrumb-item">Authentication</li>
-    <li class="breadcrumb-item"><a href="{{ route('auth.roles') }}">Roles</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">Roles</a></li>
     <li class="breadcrumb-item active">Add Roles</li>
 @endsection
 
@@ -31,7 +31,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="{{ route('auth.actionregisterroles') }}">
+                <form method="POST" action="{{ route('roles.store') }}">
                     @csrf
                     <div class="card-body">
                         {{-- NAMA ROLES --}}

@@ -36,35 +36,37 @@ class RoleController extends Controller
         // return view('auth.roles', ['hasUpdateRoles' => $hasUpdateRoles], ['hasDeleteRoles' => $hasDeleteRoles]);
     }
 
-
-    public function getRolesList(Request $request)
-    {
-
-        $datarole = Role::orderBy('id','desc')->get();
-        // dd($data);
-        return response()->json(
-            array(
-                'status' => 'ok',
-                'data' => $datarole
-            ),
-            200
-        );
-    }
-
     public function addRoles(Request $request)
     {
-        $datamenu = SidebarMenu::get();
-        // dd($datamenu);
-        return view('auth.addroles', compact('datamenu'));
-        // return view('auth.addroles');
+
     }
     public function actionRegister(Request $request)
     {
+
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+        $datamenu = SidebarMenu::get();
+        // dd($datamenu);
+        return view('auth.addroles', compact('datamenu'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
         // Buat data role
         // dd($request->all());
         $check = Role::select('role_name')
-            ->where('role_name', '=', $request->input('role_name'))
-            ->count();
+        ->where('role_name', '=', $request->input('role_name'))
+        ->count();
         if ($check == 0) {
             // $datamenu = MenuSidebar::get();
             // foreach ($datamenu as $data) {
@@ -88,33 +90,7 @@ class RoleController extends Controller
         } else {
             Session::flash('message-failed', 'Penambahan Role gagal. Sudah ada role dengan nama yang sama');
         }
-        // $hasUpdateRoles = Permission::where('role', Auth::user()->role)
-        //     ->where('view', 'roles')
-        //     ->where('update', 1)
-        //     ->exists();
-        // $hasDeleteRoles = Permission::where('role', Auth::user()->role)
-        //     ->where('view', 'roles')
-        //     ->where('delete', 1)
-        //     ->exists();
-        // $datarole = Role::get();
-        // return view('auth.roles', ['hasUpdateRoles' => $hasUpdateRoles], ['hasDeleteRoles' => $hasDeleteRoles]);
-        return redirect(route('auth.roles'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return redirect(route('roles.index'));
     }
 
     /**
@@ -123,6 +99,15 @@ class RoleController extends Controller
     public function show(Role $role)
     {
         //
+        $datarole = $role::orderBy('id', 'desc')->get();
+        // dd($data);
+        return response()->json(
+            array(
+                'status' => 'ok',
+                'data' => $datarole
+            ),
+            200
+        );
     }
 
     /**

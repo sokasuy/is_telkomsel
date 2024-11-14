@@ -34,7 +34,16 @@ class UserController extends Controller
 
     public function getUsersList(Request $request)
     {
-        $data = User::getDataListUsers();
+
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(User $user)
+    {
+        //
+        $data = $user::getDataListUsers();
         // dd($data);
         return response()->json(
             array(
@@ -45,15 +54,22 @@ class UserController extends Controller
         );
     }
 
-    public function addUser()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
+        //
         $datarole = Role::select('role_name')->get();
         return view('auth.adduser', compact('datarole'));
-        // return view('auth.adduser');
     }
 
-    public function actionRegister(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
+        //
         $user = new User();
         $user->validator($request->all())->validate();
 
@@ -62,10 +78,13 @@ class UserController extends Controller
         //TAMBAHAN BARU dari https://www.ayongoding.com/membuat-register-user-laravel/
 
         Session::flash('message', 'Penambahan user baru berhasil. User sudah aktif, silahkan login menggunakan email dan password.');
-        return redirect(route('auth.users'));
+        return redirect(route('users.index'));
     }
 
-    public function changeUserPassword(Request $request)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function editPassword(Request $request)
     {
         //
         $id = $request->get('id');
@@ -80,7 +99,10 @@ class UserController extends Controller
         );
     }
 
-    public function actionChangeUserPassword(Request $request)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function updatePassword(Request $request)
     {
         try {
             $id = $request->get('id');
@@ -109,7 +131,10 @@ class UserController extends Controller
         }
     }
 
-    public function changeUserRole(Request $request)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function editRole(Request $request)
     {
         //
         $id = $request->get('id');
@@ -125,7 +150,7 @@ class UserController extends Controller
         );
     }
 
-    public function actionChangeUserRole(Request $request)
+    public function updateRole(Request $request)
     {
         try {
             $id = $request->get('id');

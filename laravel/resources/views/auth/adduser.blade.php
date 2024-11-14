@@ -7,7 +7,7 @@
     <span>
         <h1>USERS
         </h1>
-        Add User. <a href="{{ route('auth.users') }}"><i class="fas fa-angle-double-left"></i>&nbsp;Back to all
+        Add User. <a href="{{ route('users.index') }}"><i class="fas fa-angle-double-left"></i>&nbsp;Back to all
             <span>Users</span></a>
     </span>
 @endsection
@@ -15,7 +15,7 @@
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">Home</a></li>
     <li class="breadcrumb-item">Authentication</li>
-    <li class="breadcrumb-item"><a href="{{ route('auth.users') }}">Users</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Users</a></li>
     <li class="breadcrumb-item active">Add User</li>
 @endsection
 
@@ -30,7 +30,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="{{ route('auth.actionregister') }}">
+                <form method="POST" action="{{ route('users.store') }}">
                     @csrf
                     <div class="card-body">
                         {{-- NAMA --}}

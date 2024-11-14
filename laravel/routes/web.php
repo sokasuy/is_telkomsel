@@ -37,28 +37,28 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('EnsureAuthenticationAccess')->group(function () {
         //AUTHENTICATION FORMS
-        Route::get('/authentication/users', [UserController::class, 'index'])->name('auth.users')->middleware('EnsureUserHasPermission:authentication,users,read');
-        Route::post('/authentication/users/get-users-list', [UserController::class, 'getUsersList'])->name('auth.getuserslist');
-        Route::get('/authentication/users/add-user', [UserController::class, 'addUser'])->name('auth.adduser')->middleware('EnsureUserHasPermission:authentication,users,create');
-        Route::post('/authentication/users/add-user/action', [UserController::class, 'actionRegister'])->name('auth.actionregister');
-        Route::post('/authentication/users/change-password', [UserController::class, 'changeUserPassword'])->name('auth.changeuserpassword')->middleware('EnsureUserHasPermission:authentication,users,update');
-        Route::post('/authentication/users/change-password/action', [UserController::class, 'actionChangeUserPassword'])->name('auth.actionchangeuserpwd');
-        Route::post('/authentication/users/change-role', [UserController::class, 'changeUserRole'])->name('auth.changeuserrole')->middleware('EnsureUserHasPermission:authentication,users,update');
-        Route::post('/authentication/users/change-role/action', [UserController::class, 'actionChangeUserRole'])->name('auth.actionchangeuserrole');
+        Route::get('/authentication/users', [UserController::class, 'index'])->name('users.index')->middleware('EnsureUserHasPermission:authentication,users,read');
+        Route::post('/authentication/users/show', [UserController::class, 'show'])->name('users.show');
+        Route::get('/authentication/users/create', [UserController::class, 'create'])->name('users.create')->middleware('EnsureUserHasPermission:authentication,users,create');
+        Route::post('/authentication/users/store', [UserController::class, 'store'])->name('users.store');
+        Route::post('/authentication/users/edit-password', [UserController::class, 'editPassword'])->name('users.editpassword')->middleware('EnsureUserHasPermission:authentication,users,update');
+        Route::post('/authentication/users/update-password', [UserController::class, 'updatePassword'])->name('users.updatepassword');
+        Route::post('/authentication/users/edit-role', [UserController::class, 'editRole'])->name('users.editrole')->middleware('EnsureUserHasPermission:authentication,users,update');
+        Route::post('/authentication/users/update-role', [UserController::class, 'updateRole'])->name('users.updaterole');
 
         //ROLES
-        Route::get('/authentication/roles', [RoleController::class, 'index'])->name('auth.roles')->middleware('EnsureUserHasPermission:authentication,roles,read');
-        Route::post('/authentication/roles/get-roles-list', [RoleController::class, 'getRolesList'])->name('auth.getroles');
-        Route::get('/authentication/roles/add-roles', [RoleController::class, 'addRoles'])->name('auth.addroles')->middleware('EnsureUserHasPermission:authentication,roles,create');
-        Route::post('/authentication/roles/add-roles/action', [RoleController::class, 'actionRegister'])->name('auth.actionregisterroles');
+        Route::get('/authentication/roles', [RoleController::class, 'index'])->name('roles.index')->middleware('EnsureUserHasPermission:authentication,roles,read');
+        Route::post('/authentication/roles/show', [RoleController::class, 'show'])->name('roles.show');
+        Route::get('/authentication/roles/create', [RoleController::class, 'create'])->name('roles.create')->middleware('EnsureUserHasPermission:authentication,roles,create');
+        Route::post('/authentication/roles/store', [RoleController::class, 'store'])->name('roles.store');
 
         //PERMISSION
-        Route::get('/authentication/permissions', [PermissionController::class, 'index'])->name('auth.permission')->middleware('EnsureUserHasPermission:authentication,permission,read');
-        Route::post('/authentication/permissions/get-permission-list', [PermissionController::class, 'getPermissionList'])->name('auth.getpermission');
-        Route::post('/authentication/permissions/change-permission', [PermissionController::class, 'changePermission'])->name('auth.changepermission')->middleware('EnsureUserHasPermission:authentication,permission,update');
-        Route::post('/authentication/permissions/change-permission/action', [PermissionController::class, 'actionChangePermission'])->name('auth.actionChangePermission');
-        Route::get('/authentication/permissions/add-permission', [PermissionController::class, 'addPermissions'])->name('auth.addpermissions')->middleware('EnsureUserHasPermission:authentication,permission,create');
-        Route::post('/authentication/permissions/add-permission/action', [PermissionController::class, 'actionRegister'])->name('auth.actionregisterpermission');
+        Route::get('/authentication/permissions', [PermissionController::class, 'index'])->name('permissions.index')->middleware('EnsureUserHasPermission:authentication,permission,read');
+        Route::post('/authentication/permissions/show', [PermissionController::class, 'show'])->name('permissions.show');
+        Route::post('/authentication/permissions/edit', [PermissionController::class, 'edit'])->name('permissions.edit')->middleware('EnsureUserHasPermission:authentication,permission,update');
+        Route::post('/authentication/permissions/update', [PermissionController::class, 'update'])->name('permissions.update');
+        Route::get('/authentication/permissions/create', [PermissionController::class, 'create'])->name('permissions.create')->middleware('EnsureUserHasPermission:authentication,permission,create');
+        Route::post('/authentication/permissions/store', [PermissionController::class, 'store'])->name('permissions.store');
     });
 });
 

@@ -54,7 +54,7 @@
                         <div class="row mb-0">
                             <div class="col-md-3" style="margin-bottom: 23px;">
                                 {{-- <button type="submit" class="btn btn-primary" id="btn_adduser">Add User</button> --}}
-                                <a class="btn btn-primary btn-sm" href="{{ route('auth.addroles') }}" id="btn_adduser">
+                                <a class="btn btn-primary btn-sm" href="{{ route('roles.create') }}" id="btn_adduser">
                                     <i class="fas fa-plus">&nbsp Add Roles</i></a>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                 "processing": true,
                 // "serverSide": true,
                 "ajax": {
-                    "url": "{{ route('auth.getroles') }}",
+                    "url": "{{ route('roles.show') }}",
                     "type": "POST",
                     "data": {
                         _token: "{{ csrf_token() }}"
@@ -184,37 +184,6 @@
             }).buttons().container().appendTo('#tbl_user_wrapper .col-md-6:eq(0)');
         });
 
-        // $('#tbl_role').on('click', '.btn_changeroles', function() {
-        //     let className = $(this).closest('tr').attr("class");
-        // let row;
-        // // harus dilakukan pengecekkan, apakah tombolnya ini di child atau tetap di parent nya
-        // if (className === 'child') {
-        //     row = $(this).before();
-        // } else {
-        //     row = $(this).closest('tr');
-        // }
-
-        //     let data = $("#tbl_role").DataTable().row(row).data().id;
-        //     changePassword(data);
-        // });
-
-        // function changePassword(id) {
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: '{{ route('auth.changeuserpassword') }}',
-        //         data: {
-        //             _token: "{{ csrf_token() }}",
-        //             'id': id
-        //         },
-        //         success: function(data) {
-        //             $("#modal_content").html(data.msg);
-        //         },
-        //         error: function(data, textStatus, errorThrown) {
-        //             console.log(data);
-        //         }
-        //     });
-        // };
-
         $('#tbl_role').on('click', '.btn_delete', function() {
             let className = $(this).closest('tr').attr("class");
             let row;
@@ -228,32 +197,5 @@
             let data = $("#tbl_role").DataTable().row(row).data().id;
             alert(data);
         });
-
-        // function actionUpdatePassword(id) {
-        //     // let id = $("#id").val();
-        //     let name = $("#name").val();
-        //     let email = $("#email").val();
-        //     let password = $("#password").val();
-
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: '{{ route('auth.actionchangeuserpwd') }}',
-        //         data: {
-        //             _token: "{{ csrf_token() }}",
-        //             id: id,
-        //             name: name,
-        //             email: email,
-        //             password: password
-        //         },
-        //         success: function(data) {
-        //             if (data.status == 'ok') {
-        //                 $('#showinfo').html(data.msg);
-        //             }
-        //         },
-        //         error: function(data, textStatus, errorThrown) {
-        //             console.log(data);
-        //         }
-        //     });
-        // };
     </script>
 @endsection

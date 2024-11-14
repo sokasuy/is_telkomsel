@@ -19,12 +19,7 @@ class SPBController extends Controller
         $hasUpdateRecords = Permission::checkPermission(Auth::user()->role, 'sales', 'spb', 'spb', 'update');
         $hasDeleteRecords = Permission::checkPermission(Auth::user()->role, 'sales', 'spb', 'spb', 'delete');
 
-        return view('sales.spb', compact('hasCreateNewRecords', 'hasUpdateRecords', 'hasDeleteRecords'));
-    }
-
-    public function getSPBList(Request $request)
-    {
-
+        return view('spb.index', compact('hasCreateNewRecords', 'hasUpdateRecords', 'hasDeleteRecords'));
     }
 
     /**
@@ -49,7 +44,7 @@ class SPBController extends Controller
     public function show(SPB $sPB)
     {
         //
-        $data = SPB::getDataSPB();
+        $data = $sPB::getDataSPB();
         return response()->json(
             array(
                 'status' => 'ok',

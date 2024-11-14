@@ -33,7 +33,10 @@ class PermissionController extends Controller
     }
 
 
-    public function getPermissionList(Request $request)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Permission $permission)
     {
         // dd($request->search['value']);
         $datapermission = Permission::orderBy('id','desc')->get();
@@ -48,14 +51,20 @@ class PermissionController extends Controller
         );
     }
 
-    public function addPermissions(Request $request)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(Request $request)
     {
         $datarole = Role::select('id','role_name')->get();
         $datamenu = SidebarMenu::select('id','menu_group','menu_name','view')->get();
         return view('auth.addpermission', compact('datarole','datamenu'));
     }
 
-    public function actionRegister(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
         // Buat data permission
         // $role_name = Role::select('role_name')->where('id',$request->get('role'))->first();
@@ -84,7 +93,10 @@ class PermissionController extends Controller
         return redirect(route('auth.permission'))->with('message-success', 'Penambahan Permission baru berhasil!');
     }
 
-    public function changePermission(Request $request)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Request $request)
     {
         //
         $id = $request->get('id');
@@ -97,7 +109,11 @@ class PermissionController extends Controller
             200
         );
     }
-    public function actionChangePermission(Request $request)
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Role $role)
     {
         $id = $request->get('id');
         $create = $request->get('create');
@@ -114,8 +130,7 @@ class PermissionController extends Controller
                 'update' => $update,
                 'delete' => $delete,
             ]);
-
-            return response()->json(['status' => 'ok', 'msg' => 'Permissions updated successfully!']);
+            return response()->json(['status' => 'ok', 'msg' => "<div class='fas fa-bell alert alert-success' style='margin-bottom:10px;'>Permissions updated successfully!</div>"]);
         }
 
         return response()->json(['status' => 'error', 'msg' => 'Permission not found.']);

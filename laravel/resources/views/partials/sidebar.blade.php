@@ -203,7 +203,7 @@
                     <ul class="nav nav-treeview">
                         @if (Permission::where('role', Auth::user()->role)->where('view', 'users')->where('read', true)->exists())
                             <li class="nav-item">
-                                <a href="{{ route('auth.users') }}"
+                                <a href="{{ route('users.index') }}"
                                     class="nav-link {{ Request::is('authentication/users*') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Users</p>
@@ -214,7 +214,7 @@
                     <ul class="nav nav-treeview">
                         @if (Permission::where('role', Auth::user()->role)->where('view', 'roles')->where('read', true)->exists())
                             <li class="nav-item">
-                                <a href="{{ route('auth.roles') }}"
+                                <a href="{{ route('roles.index') }}"
                                     class="nav-link {{ Request::is('authentication/roles*') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Roles</p>
@@ -225,7 +225,7 @@
                     <ul class="nav nav-treeview">
                         @if (Permission::where('role', Auth::user()->role)->where('view', 'permission')->where('read', true)->exists())
                             <li class="nav-item">
-                                <a href="{{ route('auth.permission') }}"
+                                <a href="{{ route('permissions.index') }}"
                                     class="nav-link {{ Request::is('authentication/permissions*') ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Permission</p>

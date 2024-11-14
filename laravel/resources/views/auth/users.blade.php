@@ -51,7 +51,7 @@
                         <div class="row mb-0">
                             <div class="col-md-3" style="margin-bottom: 23px;">
                                 {{-- <button type="submit" class="btn btn-primary" id="btn_adduser">Add User</button> --}}
-                                <a class="btn btn-primary btn-sm" href="{{ route('auth.adduser') }}" id="btn_adduser">
+                                <a class="btn btn-primary btn-sm" href="{{ route('users.create') }}" id="btn_adduser">
                                     <i class="fas fa-plus">&nbsp Add User</i></a>
                             </div>
                         </div>
@@ -126,7 +126,7 @@
                 "processing": true,
                 // "serverSide": true,
                 "ajax": {
-                    "url": '{{ route('auth.getuserslist') }}',
+                    "url": '{{ route('users.show') }}',
                     "type": "POST",
                     "data": {
                         _token: "{{ csrf_token() }}"
@@ -221,7 +221,7 @@
         function changePassword(id) {
             $.ajax({
                 type: 'POST',
-                url: '{{ route('auth.changeuserpassword') }}',
+                url: '{{ route('users.editpassword') }}',
                 data: {
                     _token: "{{ csrf_token() }}",
                     'id': id
@@ -243,7 +243,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route('auth.actionchangeuserpwd') }}',
+                url: '{{ route('users.updatepassword') }}',
                 data: {
                     _token: "{{ csrf_token() }}",
                     id: id,
@@ -278,7 +278,7 @@
         function changeRole(id) {
             $.ajax({
                 type: 'POST',
-                url: '{{ route('auth.changeuserrole') }}',
+                url: '{{ route('users.editrole') }}',
                 data: {
                     _token: "{{ csrf_token() }}",
                     'id': id
@@ -310,7 +310,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route('auth.actionchangeuserrole') }}',
+                url: '{{ route('users.updaterole') }}',
                 data: {
                     _token: "{{ csrf_token() }}",
                     id: id,
@@ -322,6 +322,7 @@
                     if (data.status == 'ok') {
                         $('#showinfo').html(data.msg);
                     }
+                    location.reload();
                 },
                 error: function(data, textStatus, errorThrown) {
                     console.log(data);
